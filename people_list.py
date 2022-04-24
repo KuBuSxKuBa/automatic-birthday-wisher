@@ -112,8 +112,33 @@ class PeopleList(QWidget):
         self.InitUI()
 
     def InitUI(self):
-        STARTING_Y = 100
-        self.labels_names = []
+        self.white_box = QLabel("⠀", self)
+        self.white_box.setStyleSheet(
+            f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+        self.white_box.resize(700, 700)
+        self.white_box.move(100, 100)
+        STARTING_Y = 140
+
+        self.emailname = QLabel("E-Mail", self)
+        self.emailname.setStyleSheet(
+            f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+        self.emailname.move(225, 110)
+
+        # self.people_name = QLabel("Name", self)
+        # self.people_name.setStyleSheet(
+        #     f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+        # self.people_name.move(150, 580)
+
+        self.people_month = QLabel("Month", self)
+        self.people_month.setStyleSheet(
+            f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+        self.people_month.move(435, 110)
+
+        self.people_day = QLabel("Day", self)
+        self.people_day.setStyleSheet(
+            f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+        self.people_day.move(640, 110)
+
         with open("data.txt", "r") as file:
             data = file.readlines()
             if len(data) == 0:
@@ -122,7 +147,7 @@ class PeopleList(QWidget):
                 with open("data.txt", "r") as file:
                     data = file.readlines()
                     if len(data) != 0:
-                        for i in data[:3]:
+                        for i in data[3:]:
                             if i != "":
                                 i = i.replace(":", " ")
                                 whole_data = i.split()
@@ -136,22 +161,19 @@ class PeopleList(QWidget):
                                 self.email_label.setStyleSheet(
                                     f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 5px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
                                 self.email_label.resize(300, self.email_label.height())
-                                self.email_label.move(150, STARTING_Y)
-                                self.labels_names.append(self.email_label)
+                                self.email_label.move(100, STARTING_Y)
 
 
                                 self.month_label = QLabel(f"{month}", self)
                                 self.month_label.setStyleSheet(
                                     f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 5px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
                                 self.month_label.move(450, STARTING_Y)
-                                self.labels_names.append(self.month_label)
 
 
                                 self.day_label = QLabel(f"{day}", self)
                                 self.day_label.setStyleSheet(
                                     f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 5px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
-                                self.day_label.move(600, STARTING_Y)
-                                self.labels_names.append(self.day_label)
+                                self.day_label.move(650, STARTING_Y)
                                 STARTING_Y += 50
 
 
