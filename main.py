@@ -93,9 +93,18 @@ class MainWindow(QMainWindow):
 
 
     def take_inputs(self):
-        self.myshow = InputDialog()
-        self.myshow.setWindowTitle("Enter Details")
-        self.myshow.show()
+        with open("data.txt", "r") as file:
+            data = file.readlines()
+            if len(data) < 16:
+                self.myshow = InputDialog()
+                self.myshow.setWindowTitle("Enter Details")
+                self.myshow.show()
+            else:
+                self.msg = QMessageBox()
+                self.msg.setWindowTitle("No more space!")
+                self.msg.setText("Current limit is 16 people.\nWe are sorry.")
+                self.msg.setIcon(QMessageBox.Critical)
+                self.msg.exec_()
 
     def check_for_birthdays(self):
         self.birthday_people = []
@@ -201,15 +210,15 @@ class MainWindow(QMainWindow):
                                 self.day_label.move(600, WHITEBOARD_STARTING_Y)
                                 self.labels_names.append(self.day_label)
                                 WHITEBOARD_STARTING_Y += 50
-
-                                self.more_button = QtWidgets.QPushButton(self)
-                                self.more_button.resize(150,50)
-                                self.more_button.setStyleSheet(
-                                    f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
-                                self.more_button.move(350, 775)
-                                self.more_button.setText("See more!")
-                                self.more_button.clicked.connect(self.see_more)
-                                self.labels_names.append(self.more_button)
+                                if len(data) > 3:
+                                    self.more_button = QtWidgets.QPushButton(self)
+                                    self.more_button.resize(150,50)
+                                    self.more_button.setStyleSheet(
+                                        f"background-color: {BACKGROUND_COLOR}; color: #000000; order-style: outset; padding: 2px ; font: bold 15px ; border-width: 6px ; border-radius: 10px ; border-color: #2752B8; qproperty-alignment: AlignCenter")
+                                    self.more_button.move(350, 775)
+                                    self.more_button.setText("See more!")
+                                    self.more_button.clicked.connect(self.see_more)
+                                    self.labels_names.append(self.more_button)
 
 
 def window():
